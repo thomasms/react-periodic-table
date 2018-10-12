@@ -1,0 +1,35 @@
+.Element{
+  z-index: 1;
+  color: #FDFFEA;
+  padding: 20px;
+  width: 20px;
+  height: 25px;
+  align-items: center;
+  border:2px solid white;
+}
+
+.Element:hover{
+  z-index: 3;
+  color: #840032;
+  padding: 20px;
+  width: 20px;
+  border: 2px solid #840032;
+}
+
+.Element-atomic{
+  font-size: 12px;
+  color: #FDFFEA;
+  vertical-align: top;
+  text-align: left;
+  position: relative;
+  left: -10px;
+  top: -10px;
+}
+
+.Element-symbol{
+  color: #FDFFEA;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: center;
+  margin-top: -10px;
+}

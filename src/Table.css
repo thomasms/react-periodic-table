@@ -1,0 +1,8 @@
+.Table{
+  display: grid;
+  grid-gap: 10px 10px;
+  grid-template-columns: auto repeat(auto-fill, auto);
+  padding: 10px;
+  justify-content: center;
+  justify-items: center;
+}
