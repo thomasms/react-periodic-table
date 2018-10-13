@@ -15,7 +15,7 @@ class Element extends React.Component {
           gridColumnEnd: props.gridPosition,
           borderColor: "white"
       },
-      isSelected: false
+      parentHandler: props.handler
     }
 
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
@@ -23,9 +23,14 @@ class Element extends React.Component {
   }
 
   handleOnMouseEnter(){
+
     this.setState((prevState, props) => {
+
+      if(prevState.parentHandler){
+        prevState.parentHandler(prevState);
+      }
+
       return {
-              isSelected: true,
               style: {
                   gridColumn: prevState.gridPosition,
                   gridColumnEnd: prevState.gridPosition,
@@ -37,8 +42,12 @@ class Element extends React.Component {
 
   handleOnMouseLeave(){
     this.setState((prevState, props) => {
+
+      if(prevState.parentHandler){
+        prevState.parentHandler(null);
+      }
+
       return {
-              isSelected: true,
               style: {
                   gridColumn: prevState.gridPosition,
                   gridColumnEnd: prevState.gridPosition,

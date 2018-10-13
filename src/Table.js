@@ -4,46 +4,6 @@ import './Table.css';
 
 const MAX_LENGTH = 18;
 
-function TableRowLeftElements(data){
-  var elements = [];
-  for(var i = 0; i < data.length; i++) {
-      elements.push(
-        <Element
-          key={i}
-          symbol={data[i].symbol}
-          atomic={data[i].atomic}
-          gridPosition={i+1}
-        />
-      );
-  }
-
-  return (
-    <>
-    {elements}
-    </>
-  );
-}
-
-function TableRowRightElements(data){
-  var elements = [];
-  for(var i = 0; i < data.length; i++) {
-      elements.push(
-        <Element
-          key={MAX_LENGTH-i}
-          symbol={data[i].symbol}
-          atomic={data[i].atomic}
-          gridPosition={MAX_LENGTH-data.length+i+1}
-        />
-      );
-  }
-
-  return (
-    <>
-    {elements}
-    </>
-  );
-}
-
 class Table extends React.Component {
 
   constructor( props ) {
@@ -56,36 +16,83 @@ class Table extends React.Component {
     this.handleSelectedElement = this.handleSelectedElement.bind(this);
   }
 
-  handleSelectedElement(){
+   rowLeftElements(data, handler){
+    var elements = [];
+    for(var i = 0; i < data.length; i++) {
+        elements.push(
+          <Element
+            key={i}
+            symbol={data[i].symbol}
+            atomic={data[i].atomic}
+            gridPosition={i+1}
+            handler={this.handleSelectedElement}
+          />
+        );
+    }
 
+    return (
+      <>
+      {elements}
+      </>
+    );
+  }
+
+   rowRightElements(data, handler){
+    var elements = [];
+    for(var i = 0; i < data.length; i++) {
+        elements.push(
+          <Element
+            key={MAX_LENGTH-i}
+            symbol={data[i].symbol}
+            atomic={data[i].atomic}
+            gridPosition={MAX_LENGTH-data.length+i+1}
+            handler={this.handleSelectedElement}
+          />
+        );
+    }
+
+    return (
+      <>
+      {elements}
+      </>
+    );
+  }
+
+  handleSelectedElement(element){
+    this.setState({selectedElement: element});
   }
 
   render(){
+    var details = "";
+    if(this.state.selectedElement){
+      details = this.state.selectedElement.symbol + "-" + this.state.selectedElement.atomic
+    }
+
     return (
       <div>
         <div className="Table">
-          {TableRowLeftElements([{symbol: "H", atomic: 1}])}
-          {TableRowRightElements([{symbol: "He", atomic: 2}])}
+          {this.rowLeftElements([{symbol: "H", atomic: 1}])}
+          {this.rowRightElements([{symbol: "He", atomic: 2}])}
 
-          {TableRowLeftElements([{symbol: "Li", atomic: 3},
+          {this.rowLeftElements([{symbol: "Li", atomic: 3},
                                  {symbol: "Be", atomic: 4}])}
-          {TableRowRightElements([{symbol: "B", atomic: 5},
+          {this.rowRightElements([{symbol: "B", atomic: 5},
                                   {symbol: "C", atomic: 6},
                                   {symbol: "N", atomic: 7},
                                   {symbol: "O", atomic: 8},
                                   {symbol: "F", atomic: 9},
                                   {symbol: "Ne", atomic: 10}])}
 
-          {TableRowLeftElements([{symbol: "Na", atomic: 11},
+          {this.rowLeftElements([{symbol: "Na", atomic: 11},
                                  {symbol: "Mg", atomic: 12}])}
-          {TableRowRightElements([{symbol: "Al", atomic: 13},
+          {this.rowRightElements([{symbol: "Al", atomic: 13},
                                   {symbol: "Si", atomic: 14},
                                   {symbol: "P", atomic: 15},
                                   {symbol: "S", atomic: 16},
                                   {symbol: "Cl", atomic: 17},
                                   {symbol: "Ar", atomic: 18}])}
 
-          {TableRowLeftElements([{symbol: "K", atomic: 19},
+          {this.rowLeftElements([{symbol: "K", atomic: 19},
                                  {symbol: "Ca", atomic: 20},
                                  {symbol: "Sc", atomic: 21},
                                  {symbol: "Ti", atomic: 22},
@@ -104,7 +111,7 @@ class Table extends React.Component {
                                  {symbol: "Br", atomic: 35},
                                  {symbol: "Kr", atomic: 36}])}
 
-         {TableRowLeftElements([{symbol: "Rb", atomic: 37},
+         {this.rowLeftElements([{symbol: "Rb", atomic: 37},
                                 {symbol: "Sr", atomic: 38},
                                 {symbol: "Y", atomic: 39},
                                 {symbol: "Zr", atomic: 40},
@@ -124,7 +131,7 @@ class Table extends React.Component {
                                 {symbol: "Xe", atomic: 54}])}
         </div>
         <h3>
-          {"H"}
+          {details}
         </h3>
       </div>
     );
