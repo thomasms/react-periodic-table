@@ -5,15 +5,7 @@
   width: 20px;
   height: 25px;
   align-items: center;
-  border:2px solid white;
-}
-
-.Element:hover{
-  z-index: 3;
-  color: #840032;
-  padding: 20px;
-  width: 20px;
-  border: 2px solid #840032;
+  border:2px solid #FDFFEA;
 }
 
 .Element-atomic{
