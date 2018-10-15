@@ -10,9 +10,11 @@ class Table extends React.Component {
     super( props );
 
     this.state = {
-      selectedElement: ""
+      hoveredElement: "",
+      selectedElements: []
     }
 
+    this.handleHoveredElement = this.handleHoveredElement.bind(this);
     this.handleSelectedElement = this.handleSelectedElement.bind(this);
   }
 
@@ -25,7 +27,8 @@ class Table extends React.Component {
             symbol={data[i].symbol}
             atomic={data[i].atomic}
             gridPosition={i+1}
-            handler={this.handleSelectedElement}
+            hoverHandler={this.handleHoveredElement}
+            clickHandler={this.handleSelectedElement}
           />
         );
     }
@@ -46,7 +49,8 @@ class Table extends React.Component {
             symbol={data[i].symbol}
             atomic={data[i].atomic}
             gridPosition={MAX_LENGTH-data.length+i+1}
-            handler={this.handleSelectedElement}
+            hoverHandler={this.handleHoveredElement}
+            clickHandler={this.handleSelectedElement}
           />
         );
     }
@@ -58,14 +62,38 @@ class Table extends React.Component {
     );
   }
 
+  handleHoveredElement(element){
+    this.setState({hoveredElement: element});
+  }
+
   handleSelectedElement(element){
-    this.setState({selectedElement: element});
+    this.setState((prevState, props) => {
+
+      var elements = prevState.selectedElements;
+      if(element){
+        if(!element.isSelected){
+          elements.push(element.symbol);
+        }
+        else{
+          elements = elements.filter(function(value, index, arr){
+              return value !== element.symbol;
+          });
+        }
+      }
+
+      return { selectedElements: elements };
+    });
   }
 
   render(){
     var details = "";
-    if(this.state.selectedElement){
-      details = this.state.selectedElement.symbol + "-" + this.state.selectedElement.atomic
+    if(this.state.hoveredElement){
+      details = this.state.hoveredElement.symbol;
+    }
+
+    var selectedElements = "";
+    for(var i = 0; i < this.state.selectedElements.length; i++) {
+      selectedElements += this.state.selectedElements[i] + ", ";
     }
 
     return (
@@ -133,6 +161,9 @@ class Table extends React.Component {
         <h3>
           {details}
         </h3>
+        <div className="Table-footer">
+          <b>Selected elements:</b> {selectedElements}
+        </div>
       </div>
     );
   }

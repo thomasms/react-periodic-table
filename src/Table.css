@@ -6,3 +6,13 @@
   justify-items: center;
   padding-top: 60px
 }
+
+.Table-footer{
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  margin-left: 70px;
+  margin-bottom: 30px;
+  position: absolute;
+  bottom: 10px;
+}
