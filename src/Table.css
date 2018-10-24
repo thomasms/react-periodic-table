@@ -1,6 +1,6 @@
 .Table{
   display: grid;
-  grid-gap: 10px 10px;
+  grid-gap: 5px 5px;
   grid-template-columns: auto repeat(auto-fill, auto);
   justify-content: center;
   justify-items: center;

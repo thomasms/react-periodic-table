@@ -1,12 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Archivo|Montserrat');
+
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
   min-width: 1400px;
   overflow-x: visible;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+	font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
