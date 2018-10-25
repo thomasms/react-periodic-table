@@ -136,6 +136,44 @@ class Table extends React.Component {
                             {symbol: "Te", atomic: 52, name: "Tellurium"},
                             {symbol: "I", atomic: 53, name: "Iodine"},
                             {symbol: "Xe", atomic: 54, name: "Xenon"}])}
+
+    {this.rowLeftElements([{symbol: "Cs", atomic: 55, name: "Caesium"},
+                           {symbol: "Ba", atomic: 56, name: "Barium"}])}
+
+    {this.rowRightElements([{symbol: "Hf", atomic: 72, name: "Hafnium"},
+                            {symbol: "Ta", atomic: 73, name: "Tantalum"},
+                            {symbol: "W", atomic: 74, name: "Tungsten"},
+                            {symbol: "Re", atomic: 75, name: "Rhenium"},
+                            {symbol: "Cl", atomic: 76, name: "Chlorine"},
+                            {symbol: "Ar", atomic: 77, name: "Argon"},
+                            {symbol: "Al", atomic: 78, name: "Aluminium"},
+                            {symbol: "Si", atomic: 79, name: "Silicon"},
+                            {symbol: "P", atomic: 80, name: "Phosphorus"},
+                            {symbol: "S", atomic: 81, name: "Sulfur"},
+                            {symbol: "Cl", atomic: 82, name: "Chlorine"},
+                            {symbol: "Ar", atomic: 83, name: "Argon"},
+                            {symbol: "S", atomic: 84, name: "Sulfur"},
+                            {symbol: "Cl", atomic: 85, name: "Chlorine"},
+                            {symbol: "Rn", atomic: 86, name: "Radon"}])}
+
+    {this.rowLeftElements([{symbol: "Fr", atomic: 87, name: "Francium"},
+                           {symbol: "Ra", atomic: 88, name: "Radium"}])}
+
+    {this.rowRightElements([{symbol: "Al", atomic: 13, name: "Aluminium"},
+                            {symbol: "Si", atomic: 14, name: "Silicon"},
+                            {symbol: "P", atomic: 15, name: "Phosphorus"},
+                            {symbol: "S", atomic: 16, name: "Sulfur"},
+                            {symbol: "Cl", atomic: 17, name: "Chlorine"},
+                            {symbol: "Ar", atomic: 18, name: "Argon"},
+                            {symbol: "Al", atomic: 13, name: "Aluminium"},
+                            {symbol: "Si", atomic: 14, name: "Silicon"},
+                            {symbol: "P", atomic: 15, name: "Phosphorus"},
+                            {symbol: "S", atomic: 16, name: "Sulfur"},
+                            {symbol: "Cl", atomic: 17, name: "Chlorine"},
+                            {symbol: "Ar", atomic: 18, name: "Argon"},
+                            {symbol: "S", atomic: 16, name: "Sulfur"},
+                            {symbol: "Cl", atomic: 17, name: "Chlorine"},
+                            {symbol: "Ar", atomic: 18, name: "Argon"}])}
       </>
     );
   }

@@ -4,7 +4,7 @@
   grid-template-columns: auto repeat(auto-fill, auto);
   justify-content: center;
   justify-items: center;
-  padding-top: 60px
+  padding-top: 0px
 }
 
 .Table-footer{
