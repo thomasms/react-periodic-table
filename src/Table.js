@@ -1,6 +1,7 @@
 import React from 'react';
 import { GridColourElement } from './Element.js';
 import './Table.css';
+import data from './data/data.json';
 
 const MAX_LENGTH = 18;
 
@@ -15,10 +16,10 @@ class Table extends React.Component {
     }
   }
 
-  createElements(data, offset){
+  createElements(data, offset, base_colour="white"){
    var elements = [];
    for(var i = 0; i < data.length; i++) {
-       var colour = "white";
+       var colour = base_colour;
        if(this.state.hoveredElement &&
           this.state.hoveredElement.symbol === data[i].symbol){
          colour = "blue";
@@ -59,7 +60,7 @@ class Table extends React.Component {
    return elements;
   }
 
-   rowLeftElements(data){
+  rowLeftElements(data){
     return (
       <>
       {this.createElements(data, 0)}
@@ -67,7 +68,15 @@ class Table extends React.Component {
     );
   }
 
-   rowRightElements(data){
+  rowMiddleElements(data){
+    return (
+      <>
+      {this.createElements(data, 2, "grey")}
+      </>
+    );
+  }
+
+  rowRightElements(data){
     return (
       <>
       {this.createElements(data, MAX_LENGTH-data.length)}
@@ -75,105 +84,47 @@ class Table extends React.Component {
     );
   }
 
+  createFromData(index){
+    if(index < 0 || index > data.elements.length){
+      return {
+        symbol: "",
+        atomic: -1,
+        name: ""
+      };
+    }
+    return {
+      symbol: data.elements[index].symbol,
+      atomic: data.elements[index].number,
+      name: data.elements[index].name
+    };
+  }
+
+  createElementsInRange(start, end){
+    var elements = [];
+    for(var i=start-1; i<end;++i){
+      elements.push(this.createFromData(i));
+    }
+    return elements;
+  }
+
+  // actual periodic table
   allElements(){
     return (
       <>
-      {this.rowLeftElements([{symbol: "H", atomic: 1, name: "Hydrogen"}])}
-      {this.rowRightElements([{symbol: "He", atomic: 2, name: "Helium"}])}
-
-      {this.rowLeftElements([{symbol: "Li", atomic: 3, name: "Lithium"},
-                             {symbol: "Be", atomic: 4, name: "Beryllium"}])}
-      {this.rowRightElements([{symbol: "B", atomic: 5, name: "Boron"},
-                              {symbol: "C", atomic: 6, name: "Carbon"},
-                              {symbol: "N", atomic: 7, name: "Nitrogen"},
-                              {symbol: "O", atomic: 8, name: "Oxygen"},
-                              {symbol: "F", atomic: 9, name: "Fluorine"},
-                              {symbol: "Ne", atomic: 10, name: "Neon"}])}
-
-      {this.rowLeftElements([{symbol: "Na", atomic: 11, name: "Sodium"},
-                             {symbol: "Mg", atomic: 12, name: "Magnesium"}])}
-      {this.rowRightElements([{symbol: "Al", atomic: 13, name: "Aluminium"},
-                              {symbol: "Si", atomic: 14, name: "Silicon"},
-                              {symbol: "P", atomic: 15, name: "Phosphorus"},
-                              {symbol: "S", atomic: 16, name: "Sulfur"},
-                              {symbol: "Cl", atomic: 17, name: "Chlorine"},
-                              {symbol: "Ar", atomic: 18, name: "Argon"}])}
-
-      {this.rowLeftElements([{symbol: "K", atomic: 19, name: "Potassium"},
-                             {symbol: "Ca", atomic: 20, name: "Calcium"},
-                             {symbol: "Sc", atomic: 21, name: "Scandium"},
-                             {symbol: "Ti", atomic: 22, name: "Titanium"},
-                             {symbol: "V", atomic: 23, name: "Vanadium"},
-                             {symbol: "Cr", atomic: 24, name: "Chromium"},
-                             {symbol: "Mn", atomic: 25, name: "Manganese"},
-                             {symbol: "Fe", atomic: 26, name: "Iron"},
-                             {symbol: "Co", atomic: 27, name: "Cobalt"},
-                             {symbol: "Ni", atomic: 28, name: "Nickel"},
-                             {symbol: "Cu", atomic: 29, name: "Copper"},
-                             {symbol: "Zn", atomic: 30, name: "Zinc"},
-                             {symbol: "Ga", atomic: 31, name: "Gallium"},
-                             {symbol: "Ge", atomic: 32, name: "Germanium"},
-                             {symbol: "As", atomic: 33, name: "Arsenic"},
-                             {symbol: "Se", atomic: 34, name: "Selenium"},
-                             {symbol: "Br", atomic: 35, name: "Bromine"},
-                             {symbol: "Kr", atomic: 36, name: "Krypton"}])}
-
-     {this.rowLeftElements([{symbol: "Rb", atomic: 37, name: "Rubidium"},
-                            {symbol: "Sr", atomic: 38, name: "Strontium"},
-                            {symbol: "Y", atomic: 39, name: "Yttrium"},
-                            {symbol: "Zr", atomic: 40, name: "Zirconium"},
-                            {symbol: "Nb", atomic: 41, name: "Niobium"},
-                            {symbol: "Mo", atomic: 42, name: "Molybdenum"},
-                            {symbol: "Tc", atomic: 43, name: "Technetium"},
-                            {symbol: "Ru", atomic: 44, name: "Ruthenium"},
-                            {symbol: "Rh", atomic: 45, name: "Rhodium"},
-                            {symbol: "Pd", atomic: 46, name: "Palladium"},
-                            {symbol: "Ag", atomic: 47, name: "Silver"},
-                            {symbol: "Cd", atomic: 48, name: "Cadmium"},
-                            {symbol: "In", atomic: 49, name: "Indium"},
-                            {symbol: "Sn", atomic: 50, name: "Tin"},
-                            {symbol: "Sb", atomic: 51, name: "Antimony"},
-                            {symbol: "Te", atomic: 52, name: "Tellurium"},
-                            {symbol: "I", atomic: 53, name: "Iodine"},
-                            {symbol: "Xe", atomic: 54, name: "Xenon"}])}
-
-    {this.rowLeftElements([{symbol: "Cs", atomic: 55, name: "Caesium"},
-                           {symbol: "Ba", atomic: 56, name: "Barium"}])}
-
-    {this.rowRightElements([{symbol: "Hf", atomic: 72, name: "Hafnium"},
-                            {symbol: "Ta", atomic: 73, name: "Tantalum"},
-                            {symbol: "W", atomic: 74, name: "Tungsten"},
-                            {symbol: "Re", atomic: 75, name: "Rhenium"},
-                            {symbol: "Cl", atomic: 76, name: "Chlorine"},
-                            {symbol: "Ar", atomic: 77, name: "Argon"},
-                            {symbol: "Al", atomic: 78, name: "Aluminium"},
-                            {symbol: "Si", atomic: 79, name: "Silicon"},
-                            {symbol: "P", atomic: 80, name: "Phosphorus"},
-                            {symbol: "S", atomic: 81, name: "Sulfur"},
-                            {symbol: "Cl", atomic: 82, name: "Chlorine"},
-                            {symbol: "Ar", atomic: 83, name: "Argon"},
-                            {symbol: "S", atomic: 84, name: "Sulfur"},
-                            {symbol: "Cl", atomic: 85, name: "Chlorine"},
-                            {symbol: "Rn", atomic: 86, name: "Radon"}])}
-
-    {this.rowLeftElements([{symbol: "Fr", atomic: 87, name: "Francium"},
-                           {symbol: "Ra", atomic: 88, name: "Radium"}])}
-
-    {this.rowRightElements([{symbol: "Al", atomic: 13, name: "Aluminium"},
-                            {symbol: "Si", atomic: 14, name: "Silicon"},
-                            {symbol: "P", atomic: 15, name: "Phosphorus"},
-                            {symbol: "S", atomic: 16, name: "Sulfur"},
-                            {symbol: "Cl", atomic: 17, name: "Chlorine"},
-                            {symbol: "Ar", atomic: 18, name: "Argon"},
-                            {symbol: "Al", atomic: 13, name: "Aluminium"},
-                            {symbol: "Si", atomic: 14, name: "Silicon"},
-                            {symbol: "P", atomic: 15, name: "Phosphorus"},
-                            {symbol: "S", atomic: 16, name: "Sulfur"},
-                            {symbol: "Cl", atomic: 17, name: "Chlorine"},
-                            {symbol: "Ar", atomic: 18, name: "Argon"},
-                            {symbol: "S", atomic: 16, name: "Sulfur"},
-                            {symbol: "Cl", atomic: 17, name: "Chlorine"},
-                            {symbol: "Ar", atomic: 18, name: "Argon"}])}
+      {this.rowLeftElements(this.createElementsInRange(1, 1))}
+      {this.rowRightElements(this.createElementsInRange(2, 2))}
+      {this.rowLeftElements(this.createElementsInRange(3, 4))}
+      {this.rowRightElements(this.createElementsInRange(5, 10))}
+      {this.rowLeftElements(this.createElementsInRange(11, 12))}
+      {this.rowRightElements(this.createElementsInRange(13, 18))}
+      {this.rowLeftElements(this.createElementsInRange(19, 36))}
+      {this.rowLeftElements(this.createElementsInRange(37, 54))}
+      {this.rowLeftElements(this.createElementsInRange(55, 56))}
+      {this.rowRightElements(this.createElementsInRange(72, 86))}
+      {this.rowLeftElements(this.createElementsInRange(87, 88))}
+      {this.rowRightElements(this.createElementsInRange(104, 118))}
+      {this.rowMiddleElements(this.createElementsInRange(57, 71))}
+      {this.rowMiddleElements(this.createElementsInRange(89, 103))}
       </>
     );
   }
@@ -181,7 +132,9 @@ class Table extends React.Component {
   render(){
     var details = "";
     if(this.state.hoveredElement){
-      details = this.state.hoveredElement.name;
+      details = this.state.hoveredElement.name +
+                " - " +
+                this.state.hoveredElement.atomic;
     }
 
     var selectedElements = "";
@@ -199,10 +152,12 @@ class Table extends React.Component {
         <div className="Table">
           {allElements}
         </div>
-        <h3>
-          {details}
-        </h3>
-        <div className="Table-footer">
+        <div className="Table-details">
+          <h3>
+            {details}
+          </h3>
+        </div>
+        <div className="Table-selector">
           <b>Selected elements:</b> {selectedElements}
         </div>
       </div>

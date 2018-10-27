@@ -3,13 +3,13 @@
   color: #FDFFEA;
   padding: 20px;
   width: 20px;
-  height: 25px;
+  height: 20px;
   align-items: center;
   border:2px solid #FDFFEA;
 }
 
 .Element-atomic{
-  font-size: 12px;
+  font-size: 10px;
   color: #FDFFEA;
   vertical-align: top;
   text-align: left;
@@ -20,7 +20,7 @@
 
 .Element-symbol{
   color: #FDFFEA;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   vertical-align: center;
   margin-top: -10px;
