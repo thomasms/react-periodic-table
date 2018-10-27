@@ -3,7 +3,7 @@
   grid-gap: 3px 3px;
   grid-template-columns: auto repeat(auto-fill, auto);
   justify-content: center;
-  padding-top: 0px;
+  padding-top: 30px;
   padding-bottom: 0px;
 }
 
@@ -15,6 +15,7 @@
   margin-top: 0px;
   margin-bottom: 60px;
   bottom: 150px;
+  width: 100%;
 }
 
 .Table-selector{

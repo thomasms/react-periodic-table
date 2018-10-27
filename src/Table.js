@@ -21,7 +21,8 @@ class Table extends React.Component {
    for(var i = 0; i < data.length; i++) {
        var colour = base_colour;
        if(this.state.hoveredElement &&
-          this.state.hoveredElement.symbol === data[i].symbol){
+          this.state.hoveredElement.symbol === data[i].symbol &&
+          this.state.hoveredElement.mass === data[i].mass){
          colour = "blue";
        }
        if(this.state.selectedElements.indexOf(data[i].symbol) > -1){
@@ -89,13 +90,17 @@ class Table extends React.Component {
       return {
         symbol: "",
         atomic: -1,
-        name: ""
+        mass: -1,
+        name: "",
+        summary: ""
       };
     }
     return {
       symbol: data.elements[index].symbol,
       atomic: data.elements[index].number,
-      name: data.elements[index].name
+      mass: data.elements[index].atomic_mass,
+      name: data.elements[index].name,
+      summary: data.elements[index].summary
     };
   }
 
@@ -120,8 +125,22 @@ class Table extends React.Component {
       {this.rowLeftElements(this.createElementsInRange(19, 36))}
       {this.rowLeftElements(this.createElementsInRange(37, 54))}
       {this.rowLeftElements(this.createElementsInRange(55, 56))}
+      {this.rowMiddleElements([{
+        symbol: "",
+        atomic: "",
+        summary: "",
+        mass: -1,
+        name: ""
+      }])}
       {this.rowRightElements(this.createElementsInRange(72, 86))}
       {this.rowLeftElements(this.createElementsInRange(87, 88))}
+      {this.rowMiddleElements([{
+        symbol: "",
+        atomic: "",
+        summary: "",
+        mass: -2,
+        name: ""
+      }])}
       {this.rowRightElements(this.createElementsInRange(104, 118))}
       {this.rowMiddleElements(this.createElementsInRange(57, 71))}
       {this.rowMiddleElements(this.createElementsInRange(89, 103))}
@@ -130,11 +149,19 @@ class Table extends React.Component {
   }
 
   render(){
+    var elementName = "";
+    if(this.state.hoveredElement){
+      elementName = this.state.hoveredElement.name;
+    }
+
     var details = "";
     if(this.state.hoveredElement){
-      details = this.state.hoveredElement.name +
-                " - " +
-                this.state.hoveredElement.atomic;
+      details = this.state.hoveredElement.summary;
+    }
+
+    var info = "";
+    if(this.state.hoveredElement && this.state.hoveredElement.mass > 0){
+      info = this.state.hoveredElement.mass;
     }
 
     var selectedElements = "";
@@ -148,18 +175,26 @@ class Table extends React.Component {
     const allElements = this.allElements();
     return (
       <div>
-        <button onClick={() => {this.setState({selectedElements: []})}}>Reset</button>
+        {/*<button onClick={() => {this.setState({selectedElements: []})}}>Reset</button>*/}
         <div className="Table">
           {allElements}
         </div>
         <div className="Table-details">
           <h3>
-            {details}
+            {elementName}
           </h3>
+          <p>
+            {info}
+          </p>
+          <p>
+            {details}
+          </p>
         </div>
+        {/*
         <div className="Table-selector">
           <b>Selected elements:</b> {selectedElements}
         </div>
+        */}
       </div>
     );
   }
