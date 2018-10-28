@@ -164,6 +164,7 @@ class Table extends React.Component {
       info = this.state.hoveredElement.mass;
     }
 
+    /*
     var selectedElements = "";
     for(var i = 0; i < this.state.selectedElements.length; i++) {
       selectedElements += this.state.selectedElements[i];
@@ -171,6 +172,7 @@ class Table extends React.Component {
         selectedElements += ", ";
       }
     }
+    */
 
     const allElements = this.allElements();
     return (
